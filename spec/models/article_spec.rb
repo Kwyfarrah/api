@@ -18,17 +18,30 @@ RSpec.describe Article, type: :model do
       expect(article.errors.messages[:content]).to include("can't be blank")
     end
 
-      it 'should test that the presence of the content' do
+    it 'should test that the presence of the content' do
       article = build :article, slug: ''
       expect(article).not_to be_valid
       expect(article.errors.messages[:slug]).to include("can't be blank")
     end
 
-      it 'should validate uniqueness of the slug' do
+    it 'should validate uniqueness of the slug' do
       article = create :article
       invalid_article = build :article, slug: article.slug
       expect(invalid_article).not_to be_valid
     end
   end
-end
 
+  describe '.recent' do
+    it 'should list recent article first' do
+      old_article = create :article
+      newer_article = create :article
+      expect(described_class.recent).to eq(
+        [newer_article, old_article]
+      )
+      old_article.update_column :created_at, Time.now
+      expect(described_class.recent).to eq(
+        [old_article, newer_article]
+      )
+    end
+  end
+end

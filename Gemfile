@@ -12,7 +12,8 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 gem 'rspec-rails' #added by course
 gem 'factory_bot_rails'#added by course
-gem 'active_model_serializers'
+gem 'active_model_serializers'#added by course
+gem 'kaminari'#added by course
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
